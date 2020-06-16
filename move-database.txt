@@ -1,0 +1,6 @@
+1- crate new empty database;
+    code: CREATE DATABASE classicmodels_backup;
+2- extract the old database sql;
+    code: mysqldump -u root -p classicmodels > d:\db\classicmodels.sql
+3- restore the sql file in the empty database;
+    code: mysql -u root -p classicmodels_backup < d:\db\classicmodels.sql

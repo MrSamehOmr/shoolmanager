@@ -1,0 +1,55 @@
+|--grade
+|   |--1
+|
+   |--2
+|--sections/
+|      |--monitoring/
+|      |   |--first-semester
+|      |   |   |--evalution
+|      |   |   |--pratical
+|      |   |   |--written
+|      |   |--second-semester
+|      |   |   |--evalution
+|      |   |   |--pratical
+|      |   |   |--written
+|      |   |--montiring-reports
+|      |   |   |--evalution
+|      |   |   |--pratical
+|      |   |   |--written
+|      |   |   |--all-reports
+|      |
+|      |--certificates/
+|      |   |--first-semester
+|      |   |--second-semester
+|      |
+|      |--sheets/
+|      |   |--first-semester
+|      |   |--second-semester
+|      |   |--successful
+|      |   |--failuer
+|      |
+|      |--statistics/
+|      |   |--first-semester
+|      |   |--second-semester
+|      |   |--post-second-round
+|      |
+|      |--statements/
+|      |   |--top-ten
+|      |   |   |--first-semester
+|      |   |   |--second-semester
+|      |   |--overall-results
+|      |   |   |--first-semester
+|      |   |   |--second-semester
+|      |   |--successful
+|      |   |--failuer
+|      |   |--vocational
+|      |
+|      |--second-round/
+
+
+
+----------------------------------------
+DataTable Functionlity
+-Sorting to the clicked column header
+-fixed columns, rows.
+-student data when mouse hover the DataTable body.
