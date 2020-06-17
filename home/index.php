@@ -1,5 +1,6 @@
 <?php
 session_start();
+ob_start('ob_gzhandler');
 
 include "../general/includes/sql/connector.php";
 include "includes/functions/functions.php";
@@ -29,3 +30,5 @@ if (isset($_SESSION['userId']) && isset($_SESSION['groupId'])) {
     echo 'Somthing Wrong';
     header("location: ../logout.php");
 }
+
+ob_end_flush();
