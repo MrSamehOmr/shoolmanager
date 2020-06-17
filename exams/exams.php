@@ -150,6 +150,9 @@ if (
                     </div>
                 </div>
 
+                <div class="menu" id="options">
+                    <span class="show-hide-colors menu-title">إخفاء الألوان</span>
+                </div>
             </div>
         </div>
 
