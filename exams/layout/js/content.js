@@ -203,17 +203,18 @@ window.onload = function () {
         optionsContainer.appendChild(freeze);
 
         // assinging the options click handlers
-        hide.onclick = hideCol;
+        // this disabled for some problems
+        // hide.onclick = hideCol;
         this.appendChild(optionsContainer);
     }
 
     var colsHeads = document.querySelectorAll('.data-table .table-head th.col-head');
     colsHeads.forEach((colHead) => {
-        colHead.addEventListener('mouseenter', createOptions);
+        // colHead.addEventListener('mouseenter', createOptions);
 
         colHead.addEventListener('mouseleave', function (ev) {
             var optionsContainer = colHead.querySelector('.head-opts-container');
-            optionsContainer.remove();
+            // optionsContainer.remove();
         });
     })
 
@@ -244,4 +245,26 @@ window.onload = function () {
         })
     }
     // freeze
+    
+    // Show Hide cells background color button
+    var showHideBGColor = document.querySelector('#options .show-hide-colors');
+    showHideBGColor.onclick = function(){
+        this.textContent = this.textContent === 'إخفاء الألوان'? 'إظهار الألوان': 'إخفاء الألوان';
+
+        var heads = document.querySelectorAll('.table-head th[colspan="1"]');
+        heads.forEach(function(head){
+            head.classList.toggle('no-bg-color');
+        })
+
+        var totals = document.querySelectorAll('.table-body td.total');
+        totals.forEach(function(td){
+            td.classList.toggle('no-bg-color');
+        })
+
+        var grades = document.querySelectorAll('.table-body td.grade');
+        grades.forEach(function(td){
+            td.classList.toggle('no-bg-color');
+        })
+    }
 }
+
