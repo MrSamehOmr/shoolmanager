@@ -1,40 +1,13 @@
 <?php
-$conn = new PDO("mysql:host=localhost;dbname=school_management", "root", "", [PDO::ERRMODE_EXCEPTION]);
-$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-$conn->query("SET NAMES 'utf8'");
-$conn->query('SET CHARACTER SET utf8');
 
-$sql =
-    "SELECT * FROM fs_sheet WHERE data_grade = 1";
+$sql ="SELECT * FROM fs_sheet WHERE data_grade = 1";
 
 $stmnt = $conn->prepare($sql);
 $stmnt->execute();
 ?>
-<style>
-    .data{
-        margin:auto;
-        width: 100%;
-    }
-    .data-table{margin: -17px 0 0 0;}
-    .data-table .table-head tr:not(:first-child) th{border: 1px solid #576574;}
-    .data-table .table-head tr:first-child th{
-        font-size: 1.2em;
-    }
-    .data-table .table-head table thead tr:nth-child(2) th{
-        height: 100px;
-    }
-    .data-table .table-head table thead tr:nth-child(3) th{
-        border-top-style: dashed;
-    }
-    .data-table .table-body{
-        height: 646px;
-    }
-    .data-table .table-body td:not(.data){
-        font-size: 0.9em;
-    }
-</style>
+
 <div class="section">
-    <div class="data-table" style="width: 100%">
+    <div class="data-table fs" style="width: 100%">
         <div class="table-head" style="width: 100%;">
             <table>
                 <thead>
@@ -128,57 +101,57 @@ $stmnt->execute();
                     <tr>
                         <th rowspan="2"><span><?php echo convertNumbers(30);?></span></th>
                         <th rowspan="2"><span><?php echo convertNumbers(70);?></span></th>
-                        <th rowspan="1"><span><?php echo convertNumbers(40);?></span></th>
+                        <th rowspan="1" class="max-deg"><span><?php echo convertNumbers(40);?></span></th>
 
                         <th rowspan="2"><span><?php echo convertNumbers(30);?></span></th>
                         <th rowspan="2"><span><?php echo convertNumbers(70);?></span></th>
-                        <th rowspan="1"><span><?php echo convertNumbers(20);?></span></th>
+                        <th rowspan="1" class="max-deg"><span><?php echo convertNumbers(20);?></span></th>
 
                         <th rowspan="2"><span><?php echo convertNumbers(30);?></span></th>
                         <th rowspan="2"><span><?php echo convertNumbers(70);?></span></th>
-                        <th rowspan="1"><span><?php echo convertNumbers(30);?></span></th>
+                        <th rowspan="1" class="max-deg"><span><?php echo convertNumbers(30);?></span></th>
                         
                         <th rowspan="2"><span><?php echo convertNumbers(30);?></span></th>
                         <th rowspan="2"><span><?php echo convertNumbers(35);?></span></th>
                         <th rowspan="2"><span><?php echo convertNumbers(35);?></span></th>
-                        <th rowspan="1"><span><?php echo convertNumbers(30);?></span></th>
+                        <th rowspan="1" class="max-deg"><span><?php echo convertNumbers(30);?></span></th>
 
                         <th rowspan="2"><span><?php echo convertNumbers(30);?></span></th>
                         <th rowspan="2"><span><?php echo convertNumbers(14);?></span></th>
                         <th rowspan="2"><span><?php echo convertNumbers(56);?></span></th>
-                        <th rowspan="1"><span><?php echo convertNumbers(20);?></span></th>
+                        <th rowspan="1" class="max-deg"><span><?php echo convertNumbers(20);?></span></th>
 
-                        <th rowspan="1"><span><?php echo convertNumbers(140);?></span></th>
+                        <th rowspan="1" class="max-deg"><span><?php echo convertNumbers(140);?></span></th>
 
-                        <th rowspan="1"><span><?php echo convertNumbers(10);?></span></th>
+                        <th rowspan="1" class="max-deg"><span><?php echo convertNumbers(10);?></span></th>
 
-                        <th rowspan="1"><span><?php echo convertNumbers(10);?></span></th>
+                        <th rowspan="1" class="max-deg"><span><?php echo convertNumbers(10);?></span></th>
 
                         <th rowspan="2"><span><?php echo convertNumbers(30);?></span></th>
                         <th rowspan="2"><span><?php echo convertNumbers(70);?></span></th>
-                        <th rowspan="1"><span><?php echo convertNumbers(20);?></span></th>
+                        <th rowspan="1" class="max-deg"><span><?php echo convertNumbers(20);?></span></th>
 
                         <th rowspan="2"><span><?php echo convertNumbers(30);?></span></th>
                         <th rowspan="2"><span><?php echo convertNumbers(14);?></span></th>
                         <th rowspan="2"><span><?php echo convertNumbers(56);?></span></th>
-                        <th rowspan="1"><span><?php echo convertNumbers(10);?></span></th>
+                        <th rowspan="1" class="max-deg"><span><?php echo convertNumbers(10);?></span></th>
 
                         <th rowspan="2"><span><?php echo convertNumbers(30);?></span></th>
                         <th rowspan="2"><span><?php echo convertNumbers(70);?></span></th>
-                        <th rowspan="1"><span><?php echo convertNumbers(10);?></span></th>
+                        <th rowspan="1" class="max-deg"><span><?php echo convertNumbers(10);?></span></th>
                     </tr>
                     <tr>
-                        <th rowspan="1"><span><?php echo convertNumbers(20);?></span></th>
-                        <th rowspan="1"><span><?php echo convertNumbers(15);?></span></th>
-                        <th rowspan="1"><span><?php echo convertNumbers(10);?></span></th>
-                        <th rowspan="1"><span><?php echo convertNumbers(15);?></span></th>
-                        <th rowspan="1"><span><?php echo convertNumbers(10);?></span></th>
-                        <th rowspan="1"><span><?php echo convertNumbers(70);?></span></th>
-                        <th rowspan="1"><span><?php echo convertNumbers(5);?></span></th>
-                        <th rowspan="1"><span><?php echo convertNumbers(5);?></span></th>
-                        <th rowspan="1"><span><?php echo convertNumbers(10);?></span></th>
-                        <th rowspan="1"><span><?php echo convertNumbers(5);?></span></th>
-                        <th rowspan="1"><span><?php echo convertNumbers(5);?></span></th>
+                        <th rowspan="1" class="min-deg"><span><?php echo convertNumbers(20);?></span></th>
+                        <th rowspan="1" class="min-deg"><span><?php echo convertNumbers(15);?></span></th>
+                        <th rowspan="1" class="min-deg"><span><?php echo convertNumbers(10);?></span></th>
+                        <th rowspan="1" class="min-deg"><span><?php echo convertNumbers(15);?></span></th>
+                        <th rowspan="1" class="min-deg"><span><?php echo convertNumbers(10);?></span></th>
+                        <th rowspan="1" class="min-deg"><span><?php echo convertNumbers(70);?></span></th>
+                        <th rowspan="1" class="min-deg"><span><?php echo convertNumbers(5);?></span></th>
+                        <th rowspan="1" class="min-deg"><span><?php echo convertNumbers(5);?></span></th>
+                        <th rowspan="1" class="min-deg"><span><?php echo convertNumbers(10);?></span></th>
+                        <th rowspan="1" class="min-deg"><span><?php echo convertNumbers(5);?></span></th>
+                        <th rowspan="1" class="min-deg"><span><?php echo convertNumbers(5);?></span></th>
                     </tr>
                 </thead>
             </table>
@@ -264,14 +237,16 @@ $stmnt->execute();
                 <tbody>
                 </tbody>
                 <?php
+                $line = "even";
                 while ($row = $stmnt->fetch(PDO::FETCH_ASSOC)) {
-                    $r = "<tr>";
+                    $line = $line === "even"? "odd": "even";
+                    $r = "<tr class='$line'>";
                     foreach ($row as $key => $value) {
                         $r .= "<td class='";
                         $r .= str_replace("_", " ", $key) . " ";
                         if ($value == "غ" || $value == "غائب") {
                             $r .= "warning";
-                        } elseif ($value == "دون المستوى") {
+                        } elseif ($value === "دون المستوى" || $value === "معيد") {
                             $r .= "wrong";
                         }
                         $r .= "'>";
