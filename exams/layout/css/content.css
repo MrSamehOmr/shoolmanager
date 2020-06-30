@@ -147,6 +147,12 @@ a {
     max-width: var(--cell-size-1);
 }
 
+.cell-size-1-1 {
+    width    : 80px;
+    min-width: 80px;
+    max-width: 80px;
+}
+
 .cell-size-2 {
     width    : var(--cell-size-2);
     min-width: var(--cell-size-2);
@@ -157,6 +163,7 @@ a {
     width    : var(--cell-size-3);
     min-width: var(--cell-size-3);
     max-width: var(--cell-size-3);
+    font-size: 2em;
 }
 
 th.head-space-holder {
@@ -249,43 +256,7 @@ th.head-space-holder {
 *************************
 */
 
-/*
-**********************************************
-*   first-semester data-table general style 
-**********************************************
-*/
-.data-table.fs {
-    margin: -17px 0 0 0;
-}
 
-.data-table.fs .table-head,
-.data-table.fs .table-body {
-    width: 100%;
-}
-
-.data-table.fs .table-body {
-    height: 646px;
-}
-
-.data-table.fs .table-head tr:not(:first-child) th {
-    border: 1px solid #576574;
-}
-
-.data-table.fs .table-head tr:first-child th {
-    font-size: 1.2em;
-}
-
-.data-table.fs .table-head table thead tr:nth-child(2) th {
-    height: 100px;
-}
-
-.data-table.fs .table-head table thead tr:nth-child(3) th {
-    border-top-style: dashed;
-}
-
-.data-table.fs .table-body td:not(.data) {
-    font-size: 0.9em;
-}
 
 /*
 ********************************
@@ -302,17 +273,23 @@ th.head-space-holder {
 
 .data-table .table-head table thead tr:first-child th {
     background-color: #576574;
-    color: #FFF;
+    color           : #FFF;
+    border-color    : #FFF;
 }
 
 .data-table .table-head th {
-    border: 1px solid #FFF;
+    border-right: 1px solid #576574;
+    border-left : 1px solid #576574;
 }
 
-.data-table .table-head thead tr:nth-child(2) th {
+.data-table .table-head tr {
+    border-top: 1px dashed #576574;
+}
+
+/* .data-table .table-head thead tr:nth-child(2) th {
     border-color: #576574;
     height      : 30px;
-}
+} */
 
 .data-table .table-head,
 .data-table .table-body {
@@ -364,13 +341,21 @@ th.head-space-holder {
     border-top: none;
 }
 
-.data-table .table-body td.warning {
-    background-color: yellow;
-    color           : brown;
+.data-table .table-body td.total:not(.no-bg-color),
+.data-table .table-head th.total:not(.no-bg-color) {
+    background-color: #d2f7c3;
 }
 
-.data-table .table-body tr.even {
-    background-color: #f1f1f1;
+.data-table .table-body td.fs.grade:not(.wrong):not(.no-bg-color),
+.data-table .table-head th.grade:not(.no-bg-color) {
+    background-color: #b4e6ec;
+}
+
+/* special classes */
+.data-table .table-body table td.wrong {
+    font-size       : 0.8em;
+    background-color: #ffe5e9 !important;
+    color           : #e84139 !important;
 }
 
 .data-table td.active-cell {
@@ -378,10 +363,13 @@ th.head-space-holder {
     background-color: #FFF;
 }
 
-.data-table .table-body table td.wrong {
-    font-size       : 0.8em;
-    background-color: rgb(255, 212, 219);
-    color           : #EB2017;
+.data-table .table-body td.warning {
+    background-color: #ffe878 !important;
+    color           : #da2222 !important;
+}
+
+.data-table .table-body tr.even {
+    background-color: #f1f1f1;
 }
 
 .data-table td.active-cell::selection {
@@ -392,53 +380,70 @@ th.head-space-holder {
     background-color: #a6d1c0;
 }
 
-.data-table .table-body td.total:not(.no-bg-color),
-.data-table .table-head th.total:not(.no-bg-color) {
-    background-color: #faffb7;
+/*
+**********************************************
+*   practical data-table
+**********************************************
+*/
+.data-table.practical-table .table-head,
+.data-table.practical-table .table-body {
+    width: 539px;
 }
 
-.data-table .table-body td.fs.grade:not(.wrong):not(.no-bg-color),
-.data-table .table-head th.grade:not(.no-bg-color) {
-    background-color: #c3eee1;
+/*
+**********************************************
+*   written data-table
+**********************************************
+*/
+
+.data-table.written-table .table-head,
+.data-table.written-table .table-body {
+    width: 890px;
 }
 
-
-.col-head {
-    position: relative;
+/*
+**********************************************
+*   first-semester data-table
+**********************************************
+*/
+.data-table.fs {
+    margin: -17px 0 0 0;
 }
 
-.col-head .head-opts-container {
-    position        : absolute;
-    background-color: rgba(255, 255, 255, 0.7);
-    top             : 0;
-    bottom          : 0;
-    left            : 0;
-    right           : 0;
+.data-table.fs .table-head,
+.data-table.fs .table-body {
+    width: 100%;
 }
 
-.col-head .head-opts-container.portrait>span {
-    display    : block;
-    width      : 100%;
-    height     : 33%;
-    text-align : center;
-    font-size  : 18px;
-    line-height: 20px;
-    position   : relative;
+.data-table.fs .table-body {
+    height: 646px;
 }
 
-.col-head .head-opts-container.portrait>span i::before {
-    display : inline-block;
-    position: absolute;
-    top     : 50%;
-    left    : 50%;
+.data-table.fs .table-head tr:first-child {
+    font-size: 1.2em;
 }
 
-.col-head .head-opts-container.portrait>span i::before {
-    transform: translate(-50%, -50%);
+.data-table.fs .table-head table thead tr:nth-child(2) th {
+    height: 100px;
 }
 
-.col-head .head-opts-container>span:hover {
-    cursor          : pointer;
-    color           : #FFF;
-    background-color: #576574;
+.data-table.fs .table-body td:not(.data) {
+    font-size: 0.9em;
+}
+
+/* ********************************************
+            main-sheet data-table
+   ******************************************** */
+
+.data-table.main-sheet .table-head,
+.data-table.main-sheet .table-body {
+    width: 100%;
+}
+
+.data-table.main-sheet .table-head tr:first-child {
+    font-size: 1.2em;
+}
+
+.data-table.main-sheet .table-head tr:nth-child(2) {
+    border-top: none;
 }
