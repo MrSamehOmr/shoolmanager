@@ -53,8 +53,8 @@ if (
                                 <span class="sub-menu-title">التيرم الأول</span>
                                 <div class="sub-menu-content">
                                     <div class="wrapper">
-                                        <a href="<?php echo createAnchorLink($url_grade, ["section" => "monitoring", "target" => "first-semester", "view" => "evalution"]) ?>" class="menu-btn">التقويمات</a>
-                                        <a href="<?php echo createAnchorLink($url_grade, ["section" => "monitoring", "target" => "first-semester", "view" => "pratical"]) ?>" class="menu-btn">العملي</a>
+                                        <a href="<?php echo createAnchorLink($url_grade, ["section" => "monitoring", "target" => "first-semester", "view" => "evaluation"]) ?>" class="menu-btn">التقويمات</a>
+                                        <a href="<?php echo createAnchorLink($url_grade, ["section" => "monitoring", "target" => "first-semester", "view" => "practical"]) ?>" class="menu-btn">العملي</a>
                                         <a href="<?php echo createAnchorLink($url_grade, ["section" => "monitoring", "target" => "first-semester", "view" => "written"]) ?>" class="menu-btn">التحريري</a>
                                     </div>
                                 </div>
@@ -64,8 +64,8 @@ if (
                                 <span class="sub-menu-title">التيرم الثاني</span>
                                 <div class="sub-menu-content">
                                     <div class="wrapper">
-                                        <a href="<?php echo createAnchorLink($url_grade, ["section" => "monitoring", "target" => "second-semester", "view" => "pratical"]) ?>" class="menu-btn"> 1التقويمات</a>
-                                        <a href="<?php echo createAnchorLink($url_grade, ["section" => "monitoring", "target" => "second-semester", "view" => "evalution"]) ?>" class="menu-btn">العملي</a>
+                                        <a href="<?php echo createAnchorLink($url_grade, ["section" => "monitoring", "target" => "second-semester", "view" => "evaluation"]) ?>" class="menu-btn">التقويمات</a>
+                                        <a href="<?php echo createAnchorLink($url_grade, ["section" => "monitoring", "target" => "second-semester", "view" => "practical"]) ?>" class="menu-btn">العملي</a>
                                         <a href="<?php echo createAnchorLink($url_grade, ["section" => "monitoring", "target" => "second-semester", "view" => "written"]) ?>" class="menu-btn">التحريري</a>
                                     </div>
                                 </div>
@@ -90,7 +90,7 @@ if (
                     <div class="menu-content">
                         <div class="wrapper">
                             <a href="<?php echo createAnchorLink($url_grade, ["section" => "sheets", "target" => "first-semester"]) ?>" class="menu-btn" class="menu-btn">نصف العام</a>
-                            <a href="" class="menu-btn">آخر العام</a>
+                            <a href="<?php echo createAnchorLink($url_grade, ["section" => "sheets", "target" => "second-semester"]) ?>" class="menu-btn">آخر العام</a>
                             <a href="" class="menu-btn">ناجح</a>
                             <a href="" class="menu-btn">له دور ثان</a>
                         </div>
@@ -175,15 +175,17 @@ if (
                                     case ("first-semester"):
                                         if (isset($_GET["view"])) {
                                             switch ($_GET["view"]) {
-                                                case ("evalution"):
+                                                case ("evaluation"):
                                                     $section_name = "تقويمات التيرم الأول";
-                                                    include "../exams/includes/templates/data-tables/monitoring/evalution.php";
+                                                    include "../exams/includes/templates/data-tables/monitoring/evaluation.php";
                                                     break;
-                                                case ("pratical"):
+                                                case ("practical"):
                                                     $section_name = "عملي التيرم الأول";
+                                                    include "../exams/includes/templates/data-tables/monitoring/practical.php";
                                                     break;
                                                 case ("written"):
                                                     $section_name = "تحريري التيرم الأول";
+                                                    include "../exams/includes/templates/data-tables/monitoring/written.php";
                                                     break;
                                             }
                                         }
@@ -191,11 +193,17 @@ if (
                                     case ("second-semester"):
                                         if (isset($_GET["view"])) {
                                             switch ($_GET["view"]) {
-                                                case ("evalution"):
+                                                case ("evaluation"):
+                                                    $section_name = "تقويمات التيرم الثاني";
+                                                    include "../exams/includes/templates/data-tables/monitoring/evaluation.php";
                                                     break;
-                                                case ("pratical"):
+                                                case ("practical"):
+                                                    $section_name = "عملي التيرم الثاني";
+                                                    include "../exams/includes/templates/data-tables/monitoring/practical.php";
                                                     break;
                                                 case ("written"):
+                                                    $section_name = "تحريري التيرم الثاني";
+                                                    include "../exams/includes/templates/data-tables/monitoring/written.php";
                                                     break;
                                             }
                                         }
@@ -203,7 +211,7 @@ if (
                                     case ("montiring-reports"):
                                         if (isset($_GET["view"])) {
                                             switch ($_GET["view"]) {
-                                                case ("evalution"):
+                                                case ("evaluation"):
                                                     break;
                                                 case ("pratical"):
                                                     break;
@@ -241,6 +249,8 @@ if (
                                         break;
 
                                     case ("second-semester"):
+                                        $sheet_name = "الشيت الرئيسي";
+                                        include "../exams/includes/templates/data-tables/sheets/main-sheet.php";
                                         break;
 
                                     case ("successful"):
