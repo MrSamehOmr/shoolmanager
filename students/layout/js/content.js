@@ -25,8 +25,6 @@ const saveChanges = function (cell) {
             xhr.open('POST', '../students/update.php', true);
             xhr.setRequestHeader('Content-Type', 'application/json');
             xhr.send(JSON.stringify(data));
-
-
         }
     }
 }
@@ -38,7 +36,6 @@ const keyDownHandler = (keyCode, cell, ev) => {
         ev.preventDefault();
 
         cell.blur();
-        // return;
         keyCode = 40;
     }
     if (keyCode == 27) { // escape key
@@ -62,7 +59,6 @@ const keyDownHandler = (keyCode, cell, ev) => {
     }
 
     else if (keyCode == 38 || keyCode == 40) { // up and down
-        // let nextRow;
 
         for (let i = 0; i < currentRow.childElementCount; i++) {
             if (cell == currentRow.childNodes[i]) {
