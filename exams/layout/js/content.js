@@ -6,23 +6,72 @@ window.onload = function () {
             return indies[+w]
         });
     }
-
+    var parsed = (function () {
+        var string = location.search;
+        string = string.replace('?', '');
+        var parts = string.split('&');
+        var obj = {};
+        parts.forEach((part) => {
+            var line = part.split('=');
+            obj[line[0]] = line[1];
+        })
+        return obj;
+    })();
     // horizontal scrolling
+    var tableHead = document.querySelector('.data-table .table-head');
+    var tableBody = document.querySelector('.data-table .table-body');
 
+    if (tableBody != null) {
+        tableBody.scrollTo(tableBody.scrollWidth, 0)
+        tableBody.addEventListener('scroll', function (ev) {
+            tableHead.scroll(tableBody.scrollLeft, 0);
+        });
+    }
+
+    let cols = {
+        evaluation: [
+            "arabic",
+            "english",
+            "socialStudies",
+            "math",
+            "sciences",
+            "activity_1",
+            "activity_2",
+            "religion",
+            "computer",
+            "draw",
+            "sports"
+        ],
+        practical: [
+            "sciences",
+            "computer"
+        ],
+        written: [
+            "arabic",
+            "english",
+            "socialStudies",
+            "aljebra",
+            "geometry",
+            "sciences",
+            "religion",
+            "computer",
+            "draw"
+        ]
+    }
     // columns names for monitoring table
-    let colNames = [
-        "arabic",
-        "english",
-        "socialStudies",
-        "math",
-        "sciences",
-        "activity_1",
-        "activity_2",
-        "religion",
-        "computer",
-        "draw",
-        "sports"
-    ];
+    // let colNames = [
+    //     "arabic",
+    //     "english",
+    //     "socialStudies",
+    //     "math",
+    //     "sciences",
+    //     "activity_1",
+    //     "activity_2",
+    //     "religion",
+    //     "computer",
+    //     "draw",
+    //     "sports"
+    // ];
 
 
     const columnSummary = function (colName) {
@@ -46,10 +95,17 @@ window.onload = function () {
 
     }
 
-    if (document.querySelector('.monitoring-summary') != null)
+    if (document.querySelector('.monitoring-summary') != null) {
+        var colNames = [];
+        if(parsed.view === 'practical') colNames = cols.practical;
+        else if(parsed.view === 'evaluation') colNames = cols.evaluation;
+        else if(parsed.view === 'written') colNames = cols.written;
+        console.log(parsed);
+        console.log(parsed.view === 'written');
         colNames.forEach((colName) => {
             getSummary(colName);
         });
+    }
 
     function getSummary(colName) {
         const monitoringRow = document.querySelector('tr[rowname="monitoring"]');
@@ -64,31 +120,39 @@ window.onload = function () {
         return function () {
             if (cell.getAttribute('dirty') == 'true' && cell.textContent != cell.getAttribute('old-value')) {
                 let colName = cell.getAttribute('colname');
-                let dataValue = cell.textContent;
+                let dataValue = cell.textContent[cell.textContent.length - 1] === '.' ? cell.textContent.replace('.', '') : cell.textContent;
+                dataValue = dataValue === 'غ'? -1 : dataValue;
+                let id = cell.parentElement.querySelector('.studentId').textContent;
 
                 let xhr = new XMLHttpRequest();
                 xhr.onreadystatechange = function () {
-                    if (this.readyState == 4 && this.status == 200) {
-                        cell.textContent = this.responseText;
-                        if (cell.textContent == 'غ') {
-                            cell.classList.add('warning');
-                        } else {
-                            cell.classList.remove('warning');
-                        }
-
+                    if (this.readyState === 4 && this.status === 200) {
                         console.log(this.responseText);
-
-                        getSummary(colName);
+                        var msg = JSON.parse(this.responseText);
+                        if (msg.state === 'succeeded') {
+                            cell.textContent = cell.textContent.toIndiNums();
+                            if (cell.textContent === 'غ') {
+                                cell.classList.add('warning');
+                            } else {
+                                cell.classList.remove('warning');
+                            }
+                        }
                     }
+                    getSummary(colName);
                 }
-                xhr.open('POST', "../exams/includes/templates/data-tables/monitoring/evalution.php", true);
+                xhr.open('POST', "http://localhost:8080/schoolmanager/exams/data-handlers/monitroing-save.php", true);
 
                 xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
-                // xhr.send(`ajax=1&dataName=${colName}&dataValue=${dataValue}`);
+
                 var data = {
+                    grade: parsed.grade,
+                    semester: parsed.target.split('-')[0],
+                    table: parsed.view,
                     dataName: colName,
-                    dataValue: dataValue
+                    dataValue: dataValue,
+                    studentId: id
                 }
+                console.log(data);
                 xhr.send("ajax=1&dataName=" + JSON.stringify(data));
             }
         }
@@ -218,21 +282,11 @@ window.onload = function () {
         });
     })
 
-    var tableHead = document.querySelector('.data-table .table-head');
-    var tableBody = document.querySelector('.data-table .table-body');
-
-    if (tableBody != null) {
-        tableBody.scrollTo(tableBody.scrollWidth, 0)
-        tableBody.addEventListener('scroll', function (ev) {
-            tableHead.scroll(tableBody.scrollLeft, 0);
-        });
-    }
-
     // Options buttons click handlers
     // sort
     // hide
-    function hideCol(){
-        var rowHead  =  this.parentElement.parentElement.parentElement;
+    function hideCol() {
+        var rowHead = this.parentElement.parentElement.parentElement;
         var index = Array.from(rowHead.children).indexOf(this.parentElement.parentElement);
         console.log(index);
         var rows = tableBody.querySelectorAll('table tr');
@@ -240,31 +294,32 @@ window.onload = function () {
         let i = 0;
 
         rowHead.children[index].style.display = 'none';
-        rows.forEach(function(row){
+        rows.forEach(function (row) {
             row.children[index].style.display = 'none';
         })
     }
     // freeze
-    
+
     // Show Hide cells background color button
     var showHideBGColor = document.querySelector('#options .show-hide-colors');
-    showHideBGColor.onclick = function(){
-        this.textContent = this.textContent === 'إخفاء الألوان'? 'إظهار الألوان': 'إخفاء الألوان';
+    showHideBGColor.onclick = function () {
+        this.textContent = this.textContent === 'إخفاء الألوان' ? 'إظهار الألوان' : 'إخفاء الألوان';
 
         var heads = document.querySelectorAll('.table-head th[colspan="1"]');
-        heads.forEach(function(head){
+        heads.forEach(function (head) {
             head.classList.toggle('no-bg-color');
         })
 
         var totals = document.querySelectorAll('.table-body td.total');
-        totals.forEach(function(td){
+        totals.forEach(function (td) {
             td.classList.toggle('no-bg-color');
         })
 
         var grades = document.querySelectorAll('.table-body td.grade');
-        grades.forEach(function(td){
+        grades.forEach(function (td) {
             td.classList.toggle('no-bg-color');
         })
     }
+
 }
 
